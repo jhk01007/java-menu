@@ -9,8 +9,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 
-import static menu.util.ErrorMessage.COACH_NAME_LENGTH_ERROR;
-import static menu.util.ErrorMessage.COACH_NUM_ERROR;
+import static menu.util.ErrorMessage.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -61,9 +60,25 @@ class InputParserTest {
     @DisplayName("문자열 형태의 못먹는 메뉴를 리스트 형태로 변환한다.")
     public void parseCantEatMenu_success() throws Exception {
         // given
-        
+        String strMenuList = "우동,스시";
+
         // when
-        
+        List<String> cantEatMenu = InputParser.parseCantEatMenu(strMenuList);
+
         // then
+        assertThat(cantEatMenu).hasSize(2)
+                .containsExactlyInAnyOrder("우동", "스시");
+    }
+
+    @Test
+    @DisplayName("못먹는 메뉴의 갯수가 3개 이상이면 에러가 발생한다.")
+    public void parseCantEatMenu_fail() throws Exception {
+        // given
+        String strMenuList = "우동,스시,라자냐";
+
+        // when // then
+        assertThatThrownBy(() -> InputParser.parseCantEatMenu(strMenuList))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(CANT_EAT_MENU_LENGTH_ERROR.getMessage());
     }
 }
