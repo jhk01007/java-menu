@@ -1,6 +1,7 @@
 package menu.repo;
 
 import menu.domain.Menu;
+import menu.domain.MenuCategory;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -41,14 +42,21 @@ class MenuRepositoryTest {
         assertThat(optionalMenu.isPresent()).isEqualTo(result);
     }
 
-    @Test
+    @ParameterizedTest
+    @CsvSource(value = {
+            "JAPANESE,9",
+            "KOREAN,9",
+            "CHINESE,9",
+            "ASIAN,9",
+            "WESTERN,9"
+    })
     @DisplayName("특정 카테고리의 메뉴를 조회한다.")
-    public void findByMenuCategory() throws Exception {
-        // given
-
+    public void findByMenuCategory(MenuCategory menuCategory, int size) throws Exception {
         // when
+        List<Menu> menuList = menuRepository.findByMenuCategory(menuCategory);
 
         // then
+        assertThat(menuList).hasSize(size);
     }
 
 }
