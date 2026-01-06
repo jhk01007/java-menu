@@ -1,15 +1,16 @@
 package menu.util;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import static menu.util.ErrorMessage.COACH_NAME_LENGTH_ERROR;
-import static menu.util.ErrorMessage.COACH_NUM_ERROR;
+import static menu.util.ErrorMessage.*;
 
 public class InputParser {
 
-    public static List<String> parseCoachName(String strCoachName) {
-        String[] split = strCoachName.split(",", -1);
+    public static List<String> parseCoachName(String strCoachNameList) {
+        String[] split = strCoachNameList.split(",", -1);
 
         List<String> coachNames =  new ArrayList<>();
         validateCoachNum(split);
@@ -31,5 +32,17 @@ public class InputParser {
         if (coachName.length() < 2 || coachName.length() > 4) {
             throw new IllegalArgumentException(COACH_NAME_LENGTH_ERROR.getMessage());
         }
+    }
+
+    public static List<String> parseCantEatMenu(String strMenuList) {
+        String[] split = strMenuList.split(",", -1);
+
+        if(split.length > 2) {
+            throw new IllegalArgumentException(CANT_EAT_MENU_LENGTH_ERROR.getMessage());
+        }
+
+        return Arrays.stream(split)
+                .map(String::trim)
+                .collect(Collectors.toList());
     }
 }

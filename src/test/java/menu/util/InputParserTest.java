@@ -56,4 +56,14 @@ class InputParserTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(COACH_NAME_LENGTH_ERROR.getMessage());
     }
+    
+    @Test
+    @DisplayName("문자열 형태의 못먹는 메뉴를 리스트 형태로 변환한다.")
+    public void parseCantEatMenu_success() throws Exception {
+        // given
+        
+        // when
+        
+        // then
+    }
 }
