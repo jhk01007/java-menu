@@ -11,19 +11,35 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class MenuRepository {
 
     private static final String MENU_FILE_PATH = "./src/main/resources/menu.txt";
 
+    /**
+     * 모든 메뉴 조회
+     */
     public List<Menu> findAll() {
         return loadAll();
     }
 
+    /**
+     * 이름으로 메뉴 조회
+     */
     public Optional<Menu> findByName(String name) {
         return loadAll().stream()
                 .filter(menu -> menu.getName().equals(name))
                 .findAny();
+    }
+
+    /**
+     * 메뉴 카테고리로 조회
+     */
+    public List<Menu> findByMenuCategory(MenuCategory menuCategory) {
+        return loadAll().stream()
+                .filter(menu -> menu.getMenuCategory().equals(menuCategory))
+                .collect(Collectors.toList());
     }
 
 

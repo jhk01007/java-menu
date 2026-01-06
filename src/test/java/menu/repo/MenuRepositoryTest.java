@@ -32,4 +32,14 @@ class MenuRepositoryTest {
         // then
     }
 
+    @Test
+    @DisplayName("특정 카테고리의 메뉴를 조회한다.")
+    public void findByMenuCategory() throws Exception {
+        // given
+
+        // when
+
+        // then
+    }
+
 }
