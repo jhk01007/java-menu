@@ -2,6 +2,7 @@ package menu.service;
 
 import menu.domain.*;
 import menu.repo.MenuRepository;
+import menu.util.ErrorMessage;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,12 +21,27 @@ class MenuServiceTest {
 
     @Test
     @DisplayName("특정 이름의 메뉴를 찾는다.")
-    public void findMenuByName() throws Exception {
+    public void findMenuByName_success() throws Exception {
         // given
+        String name = "그라탱";
 
         // when
+        Menu menu = menuService.findMenuByName(name);
 
         // then
+        assertThat(menu.getName()).isEqualTo(name);
+    }
+
+    @Test
+    @DisplayName("해당 이름의 메뉴가 존재하지 않으면 에러가 발생한다.")
+    public void findMenuByName_fail() throws Exception {
+        // given
+        String name = "없는메뉴";
+
+        // when // then
+        assertThatThrownBy(() -> menuService.findMenuByName(name))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.MENU_NOT_FOUNT_ERROR.getMessage());
     }
 
     @Test
