@@ -65,7 +65,7 @@ public class MenuRepository {
 
                 for (String menuName : split) {
                     MenuCategory menuCategory = MenuCategory.nameOf(categoryName);
-                    menus.add(new Menu(menuName, menuCategory));
+                    menus.add(new Menu(menuName.trim(), menuCategory));
                 }
             }
             return menus;
