@@ -20,5 +20,16 @@ class MenuRepositoryTest {
         // then
         System.out.println(menuList);
     }
+    
+    
+    @Test
+    @DisplayName("특정 이름의 메뉴를 조회한다.")
+    public void findByName() throws Exception {
+        // given
+        
+        // when
+        
+        // then
+    }
 
 }

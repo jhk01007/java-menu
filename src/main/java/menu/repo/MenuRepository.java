@@ -10,6 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class MenuRepository {
 
@@ -17,6 +18,12 @@ public class MenuRepository {
 
     public List<Menu> findAll() {
         return loadAll();
+    }
+
+    public Optional<Menu> findByName(String name) {
+        return loadAll().stream()
+                .filter(menu -> menu.getName().equals(name))
+                .findAny();
     }
 
 
