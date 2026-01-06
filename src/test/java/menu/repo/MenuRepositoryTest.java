@@ -1,10 +1,16 @@
 package menu.repo;
 
 import menu.domain.Menu;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.List;
+import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 
 class MenuRepositoryTest {
@@ -20,16 +26,19 @@ class MenuRepositoryTest {
         // then
         System.out.println(menuList);
     }
-    
-    
-    @Test
+
+    @ParameterizedTest
+    @CsvSource(value = {
+            "스시,true",
+            "없는메뉴,false"
+    })
     @DisplayName("특정 이름의 메뉴를 조회한다.")
-    public void findByName() throws Exception {
-        // given
-        
+    public void findByName(String menuName, boolean result) throws Exception {
         // when
-        
+        Optional<Menu> optionalMenu = menuRepository.findByName(menuName);
+
         // then
+        assertThat(optionalMenu.isPresent()).isEqualTo(result);
     }
 
     @Test
