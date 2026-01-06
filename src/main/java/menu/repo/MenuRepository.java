@@ -51,31 +51,31 @@ public class MenuRepository {
         if (!Files.exists(path)) {
             return List.of();
         }
-
         try (BufferedReader br = Files.newBufferedReader(path, StandardCharsets.UTF_8)) {
-            List<Menu> menus = new ArrayList<>();
-            String line;
-
-            while ((line = br.readLine()) != null) {
-                if (line.isBlank()) continue;
-
-                String categoryName = line.split(":")[0];
-                String menuList = line.substring(categoryName.length() + 2);
-                String[] split = menuList.split(",", -1);
-
-                for (String menuName : split) {
-                    MenuCategory menuCategory = MenuCategory.nameOf(categoryName);
-                    menus.add(new Menu(menuName.trim(), menuCategory));
-                }
-            }
-            return menus;
+            return readMenus(br);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
+    private static List<Menu> readMenus(BufferedReader br) throws IOException {
+        List<Menu> menus = new ArrayList<>();
+        String line;
 
+        while ((line = br.readLine()) != null) {
+            if (line.isBlank()) continue;
 
+            String categoryName = line.split(":")[0];
+            String menuList = line.substring(categoryName.length() + 2);
+            String[] split = menuList.split(",", -1);
+
+            for (String menuName : split) {
+                MenuCategory menuCategory = MenuCategory.nameOf(categoryName);
+                menus.add(new Menu(menuName.trim(), menuCategory));
+            }
+        }
+        return menus;
+    }
 
 
 }

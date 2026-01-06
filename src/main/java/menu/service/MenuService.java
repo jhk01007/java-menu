@@ -75,21 +75,22 @@ public class MenuService {
 
     private static MenuCategory selectMenuCategory(List<MenuRecommend> menuRecommendList) {
         MenuCategory menuCategory;
-        while (true) {
+        do {
             // 각 요일별로 카테고리 선정
-             menuCategory = MenuCategory.numberOf(Randoms.pickNumberInRange(1, 5));
+            menuCategory = MenuCategory.numberOf(Randoms.pickNumberInRange(1, 5));
 
             // 한주에 해당 카테고리가 2회이상 나왔는지 검증
-            int count = 0;
-            for (MenuRecommend menuRecommend : menuRecommendList) {
-                if(menuRecommend.getMenuCategory().equals(menuCategory)) {
-                    count++;
-                }
-            }
-            if(count < 2) { // 해당 카테고리가 한 주에 2회 미만 나온 경우
-                break;
+        } while (!isMenuCategoryMoreThanTwoTimes(menuRecommendList, menuCategory));
+        return menuCategory;
+    }
+
+    private static boolean isMenuCategoryMoreThanTwoTimes(List<MenuRecommend> menuRecommendList, MenuCategory menuCategory) {
+        int count = 0;
+        for (MenuRecommend menuRecommend : menuRecommendList) {
+            if(menuRecommend.getMenuCategory().equals(menuCategory)) {
+                count++;
             }
         }
-        return menuCategory;
+        return count < 2; // 해당 카테고리가 한 주에 2회 미만 나온 경우
     }
 }

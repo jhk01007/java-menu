@@ -33,7 +33,7 @@ public class MenuRecommendRunner {
         List<String> coachNames = readCoachNames();
 
         // 못먹는 메뉴 입력 및 Coach 객체 생성
-        List<Coach> coachList = readCantEatMenuList(coachNames);
+        List<Coach> coachList = createCoachList(coachNames);
 
         List<MenuRecommend> menuRecommendList = menuService.recommendMenu(coachList); // 메뉴 추천 받기
 
@@ -41,23 +41,31 @@ public class MenuRecommendRunner {
         outputView.printRecommendedResult(menuRecommendList);
     }
 
-    private List<Coach> readCantEatMenuList(List<String> coachNames) {
+    private List<Coach> createCoachList(List<String> coachNames) {
         List<Coach> coachList = new ArrayList<>();
         for (String coachName : coachNames) {
+            List<String> cantEatMenuNameList = new ArrayList<>();
             while (true) {
-                try {
-                    List<String> cantEatMenuNameList = InputParser.parseCantEatMenu(inputView.readCantEatMenu(coachName));
-                    List<Menu> cantEatMenuList = cantEatMenuNameList.stream()
-                            .map(menuService::findMenuByName)
-                            .collect(Collectors.toList()); // 메뉴 객체로 변환(실제 있는 메뉴인지도 검증)
-                    coachList.add(new Coach(coachName, cantEatMenuList));
-                    break;
-                } catch (IllegalArgumentException e) {
-                    outputView.printError(e.getMessage());
-                }
+                cantEatMenuNameList = readCantEatMenuList(coachName, cantEatMenuNameList);
+                if (cantEatMenuNameList == null) break;
+
+                List<Menu> cantEatMenuList = cantEatMenuNameList.stream()
+                        .map(menuService::findMenuByName)
+                        .collect(Collectors.toList()); // 메뉴 객체로 변환(실제 있는 메뉴인지도 검증)
+                coachList.add(new Coach(coachName, cantEatMenuList));
             }
         }
         return coachList;
+    }
+
+    private List<String> readCantEatMenuList(String coachName, List<String> cantEatMenuNameList) {
+        try {
+            cantEatMenuNameList = InputParser.parseCantEatMenu(inputView.readCantEatMenu(coachName));
+            return null;
+        } catch (IllegalArgumentException e) {
+            outputView.printError(e.getMessage());
+        }
+        return cantEatMenuNameList;
     }
 
     private List<String> readCoachNames() {

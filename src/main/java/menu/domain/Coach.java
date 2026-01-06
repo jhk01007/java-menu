@@ -1,6 +1,5 @@
 package menu.domain;
 
-import java.util.Collections;
 import java.util.List;
 
 public class Coach {

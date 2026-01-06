@@ -9,6 +9,9 @@ import static menu.util.ErrorMessage.*;
 
 public class InputParser {
 
+    /**
+     * 문자열 형태의 코치 이름을 리스트로 변환
+     */
     public static List<String> parseCoachName(String strCoachNameList) {
         String[] split = strCoachNameList.split(",", -1);
 
@@ -35,6 +38,9 @@ public class InputParser {
         }
     }
 
+    /**
+     * 문자열 형태의 못먹는 음식을 리스트 형태로 변환
+     */
     public static List<String> parseCantEatMenu(String strMenuList) {
         if(strMenuList.isBlank()) {
             return List.of();
@@ -42,12 +48,16 @@ public class InputParser {
 
         String[] split = strMenuList.split(",", -1);
 
-        if(split.length > 2) {
-            throw new IllegalArgumentException(CANT_EAT_MENU_LENGTH_ERROR.getMessage());
-        }
+        validateCantEatMenuListLength(split);
 
         return Arrays.stream(split)
                 .map(String::trim)
                 .collect(Collectors.toList());
+    }
+
+    private static void validateCantEatMenuListLength(String[] split) {
+        if(split.length > 2) {
+            throw new IllegalArgumentException(CANT_EAT_MENU_LENGTH_ERROR.getMessage());
+        }
     }
 }
