@@ -26,8 +26,8 @@ public class RecommendedMenu {
                 '}';
     }
 
-    public boolean isSameRecommend(Menu menu, Coach coach) {
-        return this.menu.getName().equals(menu.getName()) &&
-                this.coach.getName().equals(coach.getName());
+    public boolean isSameRecommend(String menuName, String coachName) {
+        return this.menu.getName().equals(menuName) &&
+                this.coach.getName().equals(coachName);
     }
 }
