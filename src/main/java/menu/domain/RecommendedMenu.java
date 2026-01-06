@@ -11,11 +11,19 @@ public class RecommendedMenu {
     }
 
     public Coach getCoach() {
-        return coach;
+        return new Coach(coach.getName(), coach.getCantEatMenuList());
     }
 
     public Menu getMenu() {
-        return menu;
+        return new Menu(menu.getName(), menu.getMenuCategory());
+    }
+
+    @Override
+    public String toString() {
+        return "RecommendedMenu{" +
+                "coach=" + coach +
+                ", menu=" + menu +
+                '}';
     }
 
     public boolean isSameRecommend(Menu menu, Coach coach) {

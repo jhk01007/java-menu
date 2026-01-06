@@ -30,4 +30,13 @@ public class MenuRecommend {
         }
         return false;
     }
+
+    @Override
+    public String toString() {
+        return "MenuRecommend{" +
+                "dayOfTheWeek=" + dayOfTheWeek +
+                ", menuCategory=" + menuCategory +
+                ", recommendedMenuList=" + recommendedMenuList +
+                '}';
+    }
 }
