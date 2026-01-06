@@ -61,10 +61,8 @@ public class MenuRepository {
     private static List<Menu> readMenus(BufferedReader br) throws IOException {
         List<Menu> menus = new ArrayList<>();
         String line;
-
         while ((line = br.readLine()) != null) {
             if (line.isBlank()) continue;
-
             String categoryName = line.split(":")[0];
             String menuList = line.substring(categoryName.length() + 2);
             String[] split = menuList.split(",", -1);

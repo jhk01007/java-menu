@@ -25,19 +25,13 @@ public class MenuService {
 
     public List<MenuRecommend> recommendMenu(List<Coach> coachList) {
         List<MenuRecommend> menuRecommendList = new ArrayList<>();
-
         for (DayOfTheWeek day : DayOfTheWeek.values()) {
-
             List<RecommendedMenu> recommendedMenuList = new ArrayList<>(); // 코치 별 추천 메뉴 리스트
             MenuCategory menuCategory = selectMenuCategory(menuRecommendList); // 메뉴 카테고리 선정하기
-
             // 각 코치별로 해당 카테고리의 메뉴 선정
             for (Coach coach : coachList) {
-                // 해당 카테고리의 메뉴 리스트 가져오기
-                List<Menu> menuList = menuRepository.findByMenuCategory(menuCategory);
-
+                List<Menu> menuList = menuRepository.findByMenuCategory(menuCategory); // 해당 카테고리의 메뉴 리스트 가져오기
                 Menu recommendedMenu = selectMenu(coach, menuList, menuRecommendList); // 랜덤으로 메뉴 선정하기
-
                 recommendedMenuList.add(new RecommendedMenu(coach, recommendedMenu));
             }
             menuRecommendList.add(new MenuRecommend(day, menuCategory, recommendedMenuList));

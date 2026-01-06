@@ -26,19 +26,11 @@ public class MenuRecommendRunner {
 
 
     public void run() {
-
-        outputView.printStartMessage();
-
-        // 코치의 이름 입력받기
-        List<String> coachNames = readCoachNames();
-
-        // 못먹는 메뉴 입력 및 Coach 객체 생성
-        List<Coach> coachList = createCoachList(coachNames);
-
+        outputView.printStartMessage(); // 시작 메시지 출력
+        List<String> coachNames = readCoachNames(); // 코치의 이름 입력받기
+        List<Coach> coachList = createCoachList(coachNames); // 못먹는 메뉴 입력 및 Coach 객체 생성
         List<MenuRecommend> menuRecommendList = menuService.recommendMenu(coachList); // 메뉴 추천 받기
-
-        // 메뉴 출력하기
-        outputView.printRecommendedResult(menuRecommendList);
+        outputView.printRecommendedResult(menuRecommendList); // 메뉴 출력하기
     }
 
     private List<Coach> createCoachList(List<String> coachNames) {

@@ -22,10 +22,6 @@ public enum MenuCategory {
         return name;
     }
 
-    public int getNumber() {
-        return number;
-    }
-
     public static MenuCategory nameOf(String name) {
         if(JAPANESE.getName().equals(name))
             return JAPANESE;

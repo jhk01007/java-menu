@@ -47,8 +47,7 @@ public class InputParser {
         }
 
         String[] split = strMenuList.split(",", -1);
-
-        validateCantEatMenuListLength(split);
+        validateCantEatMenuListLength(split); // 길이 검증
 
         return Arrays.stream(split)
                 .map(String::trim)
