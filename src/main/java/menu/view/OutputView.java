@@ -18,13 +18,14 @@ public class OutputView {
     }
 
     public void printRecommendedResult(List<MenuRecommend> menuRecommendList) {
-        System.out.println("메뉴 추천 결과입니다.");
+        System.out.println("\n메뉴 추천 결과입니다.");
 
         StringBuilder sb = new StringBuilder();
         buildDayOfWeek(menuRecommendList, sb); // 요일
         buildMenuCategory(menuRecommendList, sb); // 메뉴 카테고리
         buildCoachMenu(menuRecommendList, sb); // 코치별 추천 메뉴
 
+        sb.append("\n추천을 완료했습니다.");
         System.out.println(sb);
     }
 
@@ -41,7 +42,7 @@ public class OutputView {
         sb.append(START_BRACKET).append("카테고리");
         for (MenuRecommend menuRecommend : menuRecommendList) {
             sb.append(SPLITTER);
-            sb.append(menuRecommend.getMenuCategory());
+            sb.append(menuRecommend.getMenuCategory().getName());
         }
         sb.append(END_BRACKET).append("\n");
     }

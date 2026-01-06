@@ -15,6 +15,7 @@ public class InputParser {
         List<String> coachNames =  new ArrayList<>();
         validateCoachNum(split);
         for (String coachName : split) {
+            coachName = coachName.trim();
             validateCoachName(coachName);
             coachNames.add(coachName);
         }
