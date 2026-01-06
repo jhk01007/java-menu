@@ -1,6 +1,7 @@
 package menu.domain;
 
 import static menu.util.ErrorMessage.MENU_CATEGORY_NAME_NOT_FOUND_ERROR;
+import static menu.util.ErrorMessage.MENU_CATEGORY_NUMBER_NOT_FOUND_ERROR;
 
 public enum MenuCategory {
     JAPANESE("일식", 1),
@@ -38,5 +39,20 @@ public enum MenuCategory {
             return WESTERN;
 
         throw new IllegalArgumentException(MENU_CATEGORY_NAME_NOT_FOUND_ERROR.getMessage());
+    }
+
+    public static MenuCategory numberOf(int number) {
+        if(number == 1)
+            return JAPANESE;
+        if(number == 2)
+            return KOREAN;
+        if(number == 3)
+            return CHINESE;
+        if(number == 4)
+            return ASIAN;
+        if(number == 5)
+            return WESTERN;
+
+        throw new IllegalArgumentException(MENU_CATEGORY_NUMBER_NOT_FOUND_ERROR.getMessage());
     }
 }

@@ -17,4 +17,14 @@ class MenuCategoryTest {
         // then
     }
 
+    @Test
+    @DisplayName("번호로 MenuCategory를 찾는다.")
+    public void numberOf() throws Exception {
+        // given
+
+        // when
+
+        // then
+    }
+
 }
