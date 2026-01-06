@@ -35,6 +35,10 @@ public class InputParser {
     }
 
     public static List<String> parseCantEatMenu(String strMenuList) {
+        if(strMenuList.isBlank()) {
+            return List.of();
+        }
+
         String[] split = strMenuList.split(",", -1);
 
         if(split.length > 2) {
